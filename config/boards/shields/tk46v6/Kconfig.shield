@@ -1,0 +1,5 @@
+config SHIELD_TK46V6_LEFT
+    def_bool $(shields_list_contains,tk46v6_left)
+
+config SHIELD_TK46V6_RIGHT
+    def_bool $(shields_list_contains,tk46v6_right)

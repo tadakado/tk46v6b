@@ -1,0 +1,8 @@
+// OSRB38C9AA 38kHz IR receiver on D12 = P0.19 (demodulated output).
+// Needs CONFIG_IR_RX; decoded frames go to the debug log.
+/ {
+    ir_rx: ir_rx {
+        compatible = "zmk,ir-rx";
+        in-gpios = <&gpio0 19 GPIO_ACTIVE_HIGH>;
+    };
+};

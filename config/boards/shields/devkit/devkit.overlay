@@ -1,0 +1,55 @@
+#include "devkit.dtsi"
+
+#include "../common/ir_tx.dtsi"
+#include "../common/ir_rx.dtsi"
+
+&kscan0 {
+    col-gpios
+        = <&xiao_d 0 GPIO_ACTIVE_HIGH>
+        , <&xiao_d 1 GPIO_ACTIVE_HIGH>
+        , <&xiao_d 2 GPIO_ACTIVE_HIGH>
+        , <&xiao_d 3 GPIO_ACTIVE_HIGH>
+        , <&xiao_d 4 GPIO_ACTIVE_HIGH>
+        , <&xiao_d 6 GPIO_ACTIVE_HIGH>
+        ;
+};
+
+/ {
+    /* External BLE mouse forwarded to the active output (central / HID host). */
+    mouse_host: mouse_host {
+        compatible = "zmk,ble-mouse-host";
+    };
+
+    mouse_host_listener {
+        compatible = "zmk,input-listener";
+        device = <&mouse_host>;
+    };
+
+    behaviors {
+        mouse_pair: mouse_pair {
+            compatible = "zmk,behavior-mouse-host-pair";
+            #binding-cells = <0>;
+        };
+
+        mouse_unpair: mouse_unpair {
+            compatible = "zmk,behavior-mouse-host-unpair";
+            #binding-cells = <0>;
+        };
+
+        mouse_dump: mouse_dump {
+            compatible = "zmk,behavior-mouse-host-dump";
+            #binding-cells = <0>;
+        };
+    };
+
+    macros {
+        /* One key: dump both the BLE host profiles (&ble_dump, from
+         * common/behaviors.dtsi) and the external mouse's bond/connection
+         * state (&mouse_dump, devkit-only since it needs zmk-ble-mouse-host). */
+        bond_dump_act: bond_dump_act {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&ble_dump>, <&mouse_dump>;
+        };
+    };
+};

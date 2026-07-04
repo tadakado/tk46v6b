@@ -1,0 +1,37 @@
+// IR transmit: 38kHz carrier on PWM0 -> IR LED on D13 = P1.01.
+// Needs CONFIG_PWM + CONFIG_NRFX_PWM0; the ir_tx behavior uses the `irpwm` alias.
+&pinctrl {
+    ir_pwm0_default: ir_pwm0_default {
+        group1 {
+            psels = <NRF_PSEL(PWM_OUT0, 1, 1)>;
+        };
+    };
+
+    ir_pwm0_sleep: ir_pwm0_sleep {
+        group1 {
+            psels = <NRF_PSEL(PWM_OUT0, 1, 1)>;
+            low-power-enable;
+        };
+    };
+};
+
+&pwm0 {
+    status = "okay";
+    pinctrl-0 = <&ir_pwm0_default>;
+    pinctrl-1 = <&ir_pwm0_sleep>;
+    pinctrl-names = "default", "sleep";
+};
+
+/ {
+    ir_pwm: ir_pwm {
+        compatible = "pwm-leds";
+        ir_pwm_led0: ir_pwm_led0 {
+            /* 38kHz period = 26316ns */
+            pwms = <&pwm0 0 26316 PWM_POLARITY_NORMAL>;
+        };
+    };
+
+    aliases {
+        irpwm = &ir_pwm_led0;
+    };
+};

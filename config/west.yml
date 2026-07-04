@@ -1,0 +1,30 @@
+manifest:
+  remotes:
+    - name: zmkfirmware
+      url-base: https://github.com/zmkfirmware
+    - name: tadakado
+      url-base: https://github.com/tadakado
+  projects:
+    - name: zmk
+      remote: zmkfirmware
+      revision: main
+      import: app/west.yml
+    # Custom modules for tk46v6b (auto-discovered as Zephyr modules via the
+    # manifest -- no ZMK_EXTRA_MODULES needed).
+    - name: zmk-ir
+      remote: tadakado
+      revision: main
+    - name: zmk-rgb-indicator
+      remote: tadakado
+      revision: main
+    - name: zmk-ble-debug
+      remote: tadakado
+      revision: main
+    - name: zmk-bootloader-1200
+      remote: tadakado
+      revision: main
+    - name: zmk-ble-mouse-host
+      remote: tadakado
+      revision: main
+  self:
+    path: config

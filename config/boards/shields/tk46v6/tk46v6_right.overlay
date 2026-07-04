@@ -1,0 +1,46 @@
+#include "tk46v6.dtsi"
+
+&default_transform {
+    col-offset = <6>;
+};
+
+&kscan0 {
+    col-gpios
+        = <&xiao_d 0 GPIO_ACTIVE_HIGH>
+        , <&xiao_d 1 GPIO_ACTIVE_HIGH>
+        , <&xiao_d 2 GPIO_ACTIVE_HIGH>
+        , <&xiao_d 3 GPIO_ACTIVE_HIGH>
+        , <&xiao_d 4 GPIO_ACTIVE_HIGH>
+        , <&xiao_d 6 GPIO_ACTIVE_HIGH>
+        ;
+};
+
+/ {
+    /* zmk-ble-mouse-host only runs on the left (central) half, but
+     * tk46v6.keymap is shared by both halves, so its &mouse_pair /
+     * &mouse_unpair / &bond_dump_act references must resolve here too or
+     * the devicetree won't compile. A split peripheral never runs
+     * keymap.c (see app/CMakeLists.txt: it's built only when
+     * !CONFIG_ZMK_SPLIT || CONFIG_ZMK_SPLIT_ROLE_CENTRAL), so these
+     * bindings are compiled but never invoked on this half -- stubbed out
+     * to the already-present, harmless &ble_dump behavior. */
+    behaviors {
+        mouse_pair: mouse_pair {
+            compatible = "zmk,behavior-ble-dump";
+            #binding-cells = <0>;
+        };
+
+        mouse_unpair: mouse_unpair {
+            compatible = "zmk,behavior-ble-dump";
+            #binding-cells = <0>;
+        };
+    };
+
+    macros {
+        bond_dump_act: bond_dump_act {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&ble_dump>;
+        };
+    };
+};

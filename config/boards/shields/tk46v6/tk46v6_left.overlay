@@ -1,0 +1,72 @@
+#include "tk46v6.dtsi"
+
+/* IR transmit and IR receive are on the left half (central). */
+#include "../common/ir_tx.dtsi"
+#include "../common/ir_rx.dtsi"
+
+&kscan0 {
+    col-gpios
+        = <&xiao_d 6 GPIO_ACTIVE_HIGH>
+        , <&xiao_d 4 GPIO_ACTIVE_HIGH>
+        , <&xiao_d 3 GPIO_ACTIVE_HIGH>
+        , <&xiao_d 2 GPIO_ACTIVE_HIGH>
+        , <&xiao_d 1 GPIO_ACTIVE_HIGH>
+        , <&xiao_d 0 GPIO_ACTIVE_HIGH>
+        ;
+};
+
+/ {
+    /* External BLE mouse forwarded to the active output (central / HID host).
+     * Left-only: this is where zmk-ble-mouse-host actually runs. */
+    mouse_host: mouse_host {
+        compatible = "zmk,ble-mouse-host";
+        /* Auto-invert scroll on BLE profiles 0 and 1 (natural-scroll hosts);
+           USB and BLE 2-4 stay normal. Applied on every output switch and after
+           reboot, so it tracks the target device. Matches the old CH559 setup. */
+        wheel-invert-ble-profiles = <0 1>;
+    };
+
+    mouse_host_listener {
+        compatible = "zmk,input-listener";
+        device = <&mouse_host>;
+    };
+
+    behaviors {
+        mouse_pair: mouse_pair {
+            compatible = "zmk,behavior-mouse-host-pair";
+            #binding-cells = <0>;
+        };
+
+        mouse_unpair: mouse_unpair {
+            compatible = "zmk,behavior-mouse-host-unpair";
+            #binding-cells = <0>;
+        };
+
+        mouse_dump: mouse_dump {
+            compatible = "zmk,behavior-mouse-host-dump";
+            #binding-cells = <0>;
+        };
+
+        /* Manual wheel-invert override (OFF/ON/TOGGLE); the per-endpoint config
+         * above normally handles this automatically, so it's defined but left
+         * unbound -- bind &wheel_inv WHEEL_INV_TOGGLE in the keymap to use it
+         * (needs #include <dt-bindings/zmk/mouse_host_wheel.h>). */
+        wheel_inv: wheel_inv {
+            compatible = "zmk,behavior-mouse-host-wheel-invert";
+            #binding-cells = <1>;
+        };
+    };
+
+    macros {
+        /* One key: dump both the BLE host profiles (&ble_dump, shared) and
+         * the external mouse's bond/connection state (&mouse_dump,
+         * left-only). tk46v6_right.overlay provides a stub with the same
+         * label so the shared tk46v6.keymap compiles on both halves --
+         * see the comment there for why. */
+        bond_dump_act: bond_dump_act {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&ble_dump>, <&mouse_dump>;
+        };
+    };
+};

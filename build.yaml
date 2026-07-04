@@ -1,0 +1,24 @@
+# GitHub Actions build matrix.
+# Custom modules (zmk-ir, zmk-rgb-indicator, zmk-ble-debug, zmk-bootloader-1200,
+# zmk-ble-mouse-host) are auto-loaded from config/west.yml -- no ZMK_EXTRA_MODULES.
+include:
+  # Left / central half -- ZMK Studio enabled.
+  - board: xiao_ble/nrf52840/zmk
+    shield: tk46v6_left
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y -DCONFIG_ZMK_STUDIO_LOCKING=n
+    artifact-name: tk46v6_left
+  # Right / peripheral half.
+  - board: xiao_ble/nrf52840/zmk
+    shield: tk46v6_right
+    artifact-name: tk46v6_right
+  # One-piece dev board -- ZMK Studio enabled.
+  - board: xiao_ble/nrf52840/zmk
+    shield: devkit
+    snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y -DCONFIG_ZMK_STUDIO_LOCKING=n
+    artifact-name: devkit
+  # Settings reset (clears BLE bonds). bootloader-1200 auto-enables on this shield.
+  - board: xiao_ble/nrf52840/zmk
+    shield: settings_reset
+    artifact-name: settings_reset

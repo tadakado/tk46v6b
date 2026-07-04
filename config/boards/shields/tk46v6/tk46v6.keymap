@@ -1,0 +1,93 @@
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
+#include "../common/keycode_japanese.h"
+#include "../common/behaviors.dtsi"
+#include <dt-bindings/zmk/rgb.h>
+
+/ {
+     conditional_layers {
+        compatible = "zmk,conditional-layers";
+        tri_layer {
+            if-layers = <1 2>;
+            then-layer = <3>;
+        };
+    };
+ 
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            display-name = "Default Layer";
+            // --- ---  w   e   r   t           y   u   i   o  --- ---
+            //  q   a   s   d   f   g           h   j   k   l   p   @
+            //  _   z   x   c   v   b           n   m   ,   .   /   \
+            //         ALT GUI SFT LOW CTL CTL RIS SFT GUI ALT
+            //         ESC DEL TAB     MUH HEN     SPC BSP ENT
+
+            bindings = <
+                &none &none &kp W &kp E &kp R &kp T &kp Y &kp U &kp I &kp O &none &none
+                &kp Q &kp A &kp S &kp D &kp F &kp G &kp H &kp J &kp K &kp L &kp P &kp JP_AT
+                &kp JP_UNDER &kp Z &kp X &kp C &kp V &kp B &kp N &kp M &kp JP_COMMA &kp JP_DOT &kp JP_SLASH &kp JP_YEN
+                &none
+                &mt LALT ESC &mt LGUI DEL &mt LSHFT TAB &mo 1 &mt LCTL LANG2
+                &mt RCTL LANG1 &mo 2 &mt RSHFT SPACE &mt RGUI BSPC &mt RALT ENTER
+                &none
+            >;
+        };
+
+        lower_layer {
+            display-name = "Lower Layer";
+            // --- --- --- --- --- ---         --- --- --- --- --- ---
+            //  1   2   3   4   5   6           7   8   9   0   -   ^
+            // --- --- --- --- --- ---          ;   :   [   ]  --- ---
+            //         ___ ___ ___ ___ ___ ___ ___ ___ ___ ___
+
+            bindings = <
+                &none &none &none &none &none &none &none &none &none &none &none &none
+                &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp JP_MINUS &kp JP_CARET
+                &none &none &none &none &none &none &kp JP_SEMI &kp JP_COLON &kp JP_LBKT &kp JP_RBKT &none &none
+                &none
+                &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans
+                &none
+            >;
+        };
+
+        raise_layer {
+            display-name = "Raise Layer";
+            // --- --- --- --- --- ---         --- --- --- --- --- ---
+            // --- --- --- HOM END INS         <<< vvv ^^^ >>> Pvv P^^
+            // F1  F2  F3  F4  F5  F6          F7  F8  F9  F1O F11 F12
+            //         ___ ___ ___ ___ ___ ___ ___ ___ ___ ___
+
+            bindings = <
+                &none &none &none &none &none &none &none &none &none &none &none &none
+                &none &none &none &kp HOME &kp END &kp INS &kp LEFT &kp DOWN &kp UP &kp RIGHT &kp PG_DN &kp PG_UP
+                &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &kp F6 &kp F7 &kp F8 &kp F9 &kp F10 &kp F11 &kp F12
+                &none
+                &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans
+                &none
+            >;
+        };
+
+        adjust_layer {
+            display-name = "Raise Layer";
+            // --- --- USB BT0 BT1 BT2         BT3 BT4 CLR CLRALL --- --- (BT_DESC 0~4 : SHIFT + BT0~4)
+            // BDP MP  MUP --- --- ---         MUT Vvv v^^ --- --- ---
+            // ON  OFF EFF EFR HUD HUI         SAI SAD BRI BRD SPI SPD
+            //         ___ ___ ___ ___ ___ ___ ___ ___ ___ ___
+
+            bindings = <
+                &none &none &sel_usb &sel_ble0 &sel_ble1 &sel_ble2 &sel_ble3 &sel_ble4 &bt BT_CLR &bt BT_CLR_ALL &none &none
+                &bond_dump_act &mouse_pair &mouse_unpair &none &none &none &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP &none &none &none
+                &rgb_ug RGB_ON &rgb_ug RGB_OFF &rgb_ug RGB_EFF &rgb_ug RGB_EFR &rgb_ug RGB_HUI &rgb_ug RGB_HUD &rgb_ug RGB_SAI &rgb_ug RGB_SAD &rgb_ug RGB_BRI &rgb_ug RGB_BRD &rgb_ug RGB_SPI &rgb_ug RGB_SPD
+                &none
+                &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans
+                &none
+            >;
+        };
+
+    };
+};

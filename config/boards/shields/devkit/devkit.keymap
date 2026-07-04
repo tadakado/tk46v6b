@@ -1,0 +1,26 @@
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
+#include "../common/keycode_japanese.h"
+#include "../common/behaviors.dtsi"
+#include <dt-bindings/zmk/rgb.h>
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            display-name = "Default Layer";
+            // bt_clr    bt_clr_all  bt_nxt      bt_prv     mouse_pair  mouse_unpair
+            // bond_dump h           i           j          k           l
+            // m         n           o           p          q           r
+            // sel_usb   sel_ble0    sel_ble1    sel_ble2   sel_ble3    sel_ble4
+
+            bindings = <
+                &bt BT_CLR    &bt BT_CLR_ALL &bt BT_NXT &bt BT_PRV &mouse_pair &mouse_unpair
+                &bond_dump_act &kp H         &kp I      &kp J      &kp K       &kp L
+                &kp M         &kp N          &kp O      &kp P      &kp Q       &kp R
+                &sel_usb      &sel_ble0      &sel_ble1  &sel_ble2  &sel_ble3   &sel_ble4
+            >;
+        };
+    };
+};

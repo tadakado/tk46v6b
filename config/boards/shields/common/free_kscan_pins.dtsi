@@ -1,0 +1,11 @@
+// The XIAO defaults route UART0 TX/RX to D6 (P1.11) / D7 (P1.12) and enable SPI2
+// on P1.13/14/15 — all of which are kscan column/row pins. UART TX idles high and
+// holds D6 high, breaking that column; SPI2 claims the row pins. Disable both so
+// the matrix scans cleanly. The console is on USB/BLE.
+&uart0 {
+    status = "disabled";
+};
+
+&spi2 {
+    status = "disabled";
+};

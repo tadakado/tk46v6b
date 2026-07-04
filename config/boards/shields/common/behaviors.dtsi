@@ -1,0 +1,126 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/bt.h>
+#include "ir_codes.h"
+
+&mt {
+    quick-tap-ms = <300>;
+};
+
+/ {
+    macros {
+        sel_usb_ir: sel_usb_ir {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings =
+                <&out OUT_USB>,
+                <&macro_param_1to2>, <&ir_tx IR_CUSTOMER_CODE MACRO_PLACEHOLDER>
+            ;
+        };
+
+        sel_ble_ir: sel_ble_ir {
+            compatible = "zmk,behavior-macro-two-param";
+            #binding-cells = <2>;
+            bindings =
+                <&out OUT_BLE>,
+                <&macro_param_1to2>, <&bt BT_SEL MACRO_PLACEHOLDER>,
+                <&macro_param_2to2>, <&ir_tx IR_CUSTOMER_CODE MACRO_PLACEHOLDER>
+            ;
+        };
+
+        sel_ble: sel_ble {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings =
+                <&out OUT_BLE>,
+                <&macro_param_1to2>, <&bt BT_SEL MACRO_PLACEHOLDER>
+            ;
+        };
+
+        /* Per-profile actions = connection-select (+IR) plus a profile dump. */
+        sel_usb_act: sel_usb_act {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&sel_usb_ir IR_DATA_CH4>, <&ble_dump>;
+        };
+        sel_ble0_act: sel_ble0_act {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&sel_ble_ir 0 IR_DATA_CH1>, <&ble_dump>;
+        };
+        sel_ble1_act: sel_ble1_act {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&sel_ble_ir 1 IR_DATA_CH2>, <&ble_dump>;
+        };
+        sel_ble2_act: sel_ble2_act {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&sel_ble_ir 2 IR_DATA_CH3>, <&ble_dump>;
+        };
+        sel_ble3_act: sel_ble3_act {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&sel_ble 3>, <&ble_dump>;
+        };
+        sel_ble4_act: sel_ble4_act {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&sel_ble 4>, <&ble_dump>;
+        };
+    };
+
+    behaviors {
+        ir_tx: ir_tx {
+            compatible = "zmk,behavior-ir-tx";
+            #binding-cells = <2>;
+        };
+
+        ble_dump: ble_dump {
+            compatible = "zmk,behavior-ble-dump";
+            #binding-cells = <0>;
+        };
+
+        sel_usb: sel_usb {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&sel_usb_act>, <&none>;
+            mods = <(MOD_LSFT | MOD_RSFT)>;
+        };
+
+        sel_ble0: sel_ble0 {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&sel_ble0_act>, <&bt BT_DISC 0>;
+            mods = <(MOD_LSFT | MOD_RSFT)>;
+        };
+
+        sel_ble1: sel_ble1 {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&sel_ble1_act>, <&bt BT_DISC 1>;
+            mods = <(MOD_LSFT | MOD_RSFT)>;
+        };
+
+        sel_ble2: sel_ble2 {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&sel_ble2_act>, <&bt BT_DISC 2>;
+            mods = <(MOD_LSFT | MOD_RSFT)>;
+        };
+
+        sel_ble3: sel_ble3 {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&sel_ble3_act>, <&bt BT_DISC 3>;
+            mods = <(MOD_LSFT | MOD_RSFT)>;
+        };
+
+        sel_ble4: sel_ble4 {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&sel_ble4_act>, <&bt BT_DISC 4>;
+            mods = <(MOD_LSFT | MOD_RSFT)>;
+        };
+    };
+};

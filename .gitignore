@@ -1,0 +1,18 @@
+# west workspace (fetched by `west update`, not tracked)
+/zmk/
+/modules/
+/zephyr/
+/.west/
+
+# build artifacts
+build/
+*.uf2
+
+# Local-only tooling, not used by the GitHub Actions cloud build:
+#  - Makefile drives a local Docker/west build against ../zmk-modules
+#  - *.zmk.yml are local keyboard-catalog metadata
+/Makefile
+*.zmk.yml
+
+# macOS
+.DS_Store
