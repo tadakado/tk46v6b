@@ -3,6 +3,7 @@
 #include "../common/keycode_japanese.h"
 #include "../common/behaviors.dtsi"
 #include <dt-bindings/zmk/rgb.h>
+#include <dt-bindings/zmk/modifiers.h>
 
 / {
      conditional_layers {
@@ -12,7 +13,25 @@
             then-layer = <3>;
         };
     };
- 
+
+    behaviors {
+        /* Guard the mouse pair/unpair keys behind Shift, so a stray press on
+           the adjust layer can't drop or re-pair the mouse. Without Shift they
+           are a no-op; with Shift held they run the real behavior. */
+        mouse_pair_shift: mouse_pair_shift {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&none>, <&mouse_pair>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        mouse_unpair_shift: mouse_unpair_shift {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&none>, <&mouse_unpair>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -80,7 +99,7 @@
 
             bindings = <
                 &none &none &sel_usb &sel_ble0 &sel_ble1 &sel_ble2 &sel_ble3 &sel_ble4 &bt BT_CLR &bt BT_CLR_ALL &none &none
-                &bond_dump_act &mouse_pair &mouse_unpair &none &none &none &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP &none &none &none
+                &bond_dump_act &mouse_pair_shift &mouse_unpair_shift &none &none &none &kp C_MUTE &kp C_VOL_DN &kp C_VOL_UP &none &none &none
                 &rgb_ug RGB_ON &rgb_ug RGB_OFF &rgb_ug RGB_EFF &rgb_ug RGB_EFR &rgb_ug RGB_HUI &rgb_ug RGB_HUD &rgb_ug RGB_SAI &rgb_ug RGB_SAD &rgb_ug RGB_BRI &rgb_ug RGB_BRD &rgb_ug RGB_SPI &rgb_ug RGB_SPD
                 &none
                 &trans &trans &trans &trans &trans
