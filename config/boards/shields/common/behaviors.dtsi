@@ -91,35 +91,35 @@
         sel_ble0: sel_ble0 {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&sel_ble0_act>, <&bt BT_DISC 0>;
+            bindings = <&sel_ble0_act>, <&sel_ble 0>;
             mods = <(MOD_LSFT | MOD_RSFT)>;
         };
 
         sel_ble1: sel_ble1 {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&sel_ble1_act>, <&bt BT_DISC 1>;
+            bindings = <&sel_ble1_act>, <&sel_ble 1>;
             mods = <(MOD_LSFT | MOD_RSFT)>;
         };
 
         sel_ble2: sel_ble2 {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&sel_ble2_act>, <&bt BT_DISC 2>;
+            bindings = <&sel_ble2_act>, <&sel_ble 2>;
             mods = <(MOD_LSFT | MOD_RSFT)>;
         };
 
         sel_ble3: sel_ble3 {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&sel_ble3_act>, <&bt BT_DISC 3>;
+            bindings = <&sel_ble3_act>, <&sel_ble 3>;
             mods = <(MOD_LSFT | MOD_RSFT)>;
         };
 
         sel_ble4: sel_ble4 {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&sel_ble4_act>, <&bt BT_DISC 4>;
+            bindings = <&sel_ble4_act>, <&sel_ble 4>;
             mods = <(MOD_LSFT | MOD_RSFT)>;
         };
     };
