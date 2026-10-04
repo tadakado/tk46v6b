@@ -84,7 +84,7 @@
         sel_usb: sel_usb {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&sel_usb_act>, <&none>;
+            bindings = <&sel_usb_act>, <&out OUT_USB>;
             mods = <(MOD_LSFT | MOD_RSFT)>;
         };
 
