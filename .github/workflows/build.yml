@@ -1,8 +1,15 @@
 name: Build ZMK firmware
 
 on:
+  # Skip the firmware build when only docs (keymap chart, README) change.
   push:
+    paths-ignore:
+      - "docs/**"
+      - "**.md"
   pull_request:
+    paths-ignore:
+      - "docs/**"
+      - "**.md"
   workflow_dispatch:
 
 jobs:
