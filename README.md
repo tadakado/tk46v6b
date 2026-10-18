@@ -33,6 +33,9 @@ conditional/tri-layer). The adjust layer carries output selection
 dump (`&bond_dump_act`), mouse `&mouse_pair` / `&mouse_unpair` (Shift required,
 to avoid accidental pairing changes), media keys, and RGB underglow controls.
 
+Keymap chart: [docs/tk46v6_keymap_compact.pdf](docs/tk46v6_keymap_compact.pdf)
+(source: `docs/tk46v6_keymap_compact.pages`).
+
 ### Output selection (adjust layer)
 
 Each output key is a mod-morph on Shift:
