@@ -30,6 +30,18 @@
             bindings = <&none>, <&mouse_unpair>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
+
+        /* Raise key: hold = raise layer, tap = a lone Right Shift press/release
+           (the host OS treats a solo Shift tap as a special input).
+           hold-preferred: any other key pressed while held makes it the layer,
+           so fast raise+key rolls never leak a Shift tap. */
+        raise_rs: raise_rs {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&kp>;
+        };
     };
 
     keymap {
@@ -41,7 +53,7 @@
             //  q   a   s   d   f   g           h   j   k   l   p   @
             //  _   z   x   c   v   b           n   m   ,   .   /   \
             //         ALT GUI SFT LOW CTL CTL RIS SFT GUI ALT
-            //         ESC DEL TAB     MUH HEN     SPC BSP ENT
+            //         ESC DEL TAB     MUH HEN SFT SPC BSP ENT
 
             bindings = <
                 &none &none &kp W &kp E &kp R &kp T &kp Y &kp U &kp I &kp O &none &none
@@ -49,7 +61,7 @@
                 &kp JP_UNDER &kp Z &kp X &kp C &kp V &kp B &kp N &kp M &kp JP_COMMA &kp JP_DOT &kp JP_SLASH &kp JP_YEN
                 &none
                 &mt LALT ESC &mt LGUI DEL &mt LSHFT TAB &mo 1 &mt LCTL LANG2
-                &mt RCTL LANG1 &mo 2 &mt RSHFT SPACE &mt RGUI BSPC &mt RALT ENTER
+                &mt RCTL LANG1 &raise_rs 2 RSHFT &mt RSHFT SPACE &mt RGUI BSPC &mt RALT ENTER
                 &none
             >;
         };
