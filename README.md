@@ -29,9 +29,23 @@ mouse connects straight to the keyboard.
 
 Four layers: default, lower, raise, and an adjust layer (lower + raise via a
 conditional/tri-layer). The adjust layer carries output selection
-(`&sel_usb` / `&sel_ble0`–`4`, each also sending the matching IR code), BLE
-`BT_CLR` / `BT_CLR_ALL`, a combined bond dump (`&bond_dump_act`), mouse
-`&mouse_pair` / `&mouse_unpair`, media keys, and RGB underglow controls.
+(`&sel_usb` / `&sel_ble0`–`4`), BLE `BT_CLR` / `BT_CLR_ALL`, a combined bond
+dump (`&bond_dump_act`), mouse `&mouse_pair` / `&mouse_unpair` (Shift required,
+to avoid accidental pairing changes), media keys, and RGB underglow controls.
+
+### Output selection (adjust layer)
+
+Each output key is a mod-morph on Shift:
+
+| Key | Plain press | With Shift |
+| --- | --- | --- |
+| `&sel_usb` | USB output + IR CH4 + profile dump | USB output only |
+| `&sel_ble0`–`2` | BLE profile 0–2 + IR CH1–CH3 + profile dump | BLE profile only |
+| `&sel_ble3`–`4` | BLE profile 3–4 + profile dump (no IR code assigned) | BLE profile only |
+
+Use Shift to move the keyboard (and the BLE mouse riding on it) to another host
+without sending IR, i.e. without switching the IR-controlled device's input.
+IR codes are defined in `config/boards/shields/common/ir_codes.h`.
 
 ## Shields
 
