@@ -27,14 +27,41 @@ mouse connects straight to the keyboard.
 
 ## Layout
 
-Four layers: default, lower, raise, and an adjust layer (lower + raise via a
-conditional/tri-layer). The adjust layer carries output selection
-(`&sel_usb` / `&sel_ble0`–`4`), BLE `BT_CLR` / `BT_CLR_ALL`, a combined bond
-dump (`&bond_dump_act`), mouse `&mouse_pair` / `&mouse_unpair` (Shift required,
-to avoid accidental pairing changes), media keys, and RGB underglow controls.
+Five layers: two base layers (US / JA), lower, raise, and adjust (lower + raise
+via a conditional/tri-layer).
 
 Keymap chart: [docs/tk46v6_keymap_compact.pdf](docs/tk46v6_keymap_compact.pdf)
 (source: `docs/tk46v6_keymap_compact.pages`).
+
+### Base layers: US and JA (AZIK)
+
+The thumb Ctrl keys switch the IME and the base layer together
+(hold = Ctrl as before):
+
+| Key | Tap |
+| --- | --- |
+| Left thumb Ctrl | LANG2 (英数) + US layer |
+| Right thumb Ctrl | LANG1 (かな) + JA layer |
+
+The JA layer is the US layer with these changes for AZIK romaji input:
+
+| Position | US | JA |
+| --- | --- | --- |
+| Home row, right end | `@` | `;` (AZIK: っ) |
+| Bottom row, right end | `¥` | `:` (AZIK: ー) |
+| Raise key, tap | — | Ctrl-M |
+
+`@` and `¥` stay reachable in JA mode on the lower layer (bottom right).
+The IME needs an AZIK romaji table (e.g. Google 日本語入力).
+The layer is keyboard-side state: if the IME is switched another way, tap
+英数 / かな once to resync.
+
+### Adjust layer
+
+The adjust layer carries output selection
+(`&sel_usb` / `&sel_ble0`–`4`), BLE `BT_CLR` / `BT_CLR_ALL`, a combined bond
+dump (`&bond_dump_act`), mouse `&mouse_pair` / `&mouse_unpair` (Shift required,
+to avoid accidental pairing changes), media keys, and RGB underglow controls.
 
 ### Output selection (adjust layer)
 
