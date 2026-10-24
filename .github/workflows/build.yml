@@ -1,14 +1,17 @@
 name: Build ZMK firmware
 
 on:
-  # Skip the firmware build when only docs (keymap chart, README) change.
+  # Skip the firmware build when only docs (keymap chart, README) or the
+  # keymap-drawer data under keymap/ change.
   push:
     paths-ignore:
       - "docs/**"
+      - "keymap/**"
       - "**.md"
   pull_request:
     paths-ignore:
       - "docs/**"
+      - "keymap/**"
       - "**.md"
   workflow_dispatch:
 

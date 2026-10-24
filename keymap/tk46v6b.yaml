@@ -1,0 +1,137 @@
+layout: {dts_layout: config/boards/shields/tk46v6/tk46v6.dtsi}
+layers:
+  US:
+  - ['', '', W, E, R, T, Y, U, I, O, '', '']
+  - [Q, A, S, D, F, G, H, J, K, L, P, '@']
+  - [_, Z, X, C, V, B, N, M, ',', ., /, ¥]
+  - - ''
+    - {t: Esc, h: Alt}
+    - {t: Del, h: Cmd}
+    - {t: Tab, h: Shift}
+    - Lower
+    - {t: 英数, h: Ctrl}
+    - {t: かな, h: Ctrl}
+    - Raise
+    - {t: Space, h: Shift}
+    - {t: BS, h: Cmd}
+    - {t: Enter, h: Alt}
+    - ''
+  JA:
+  - - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+  - - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - ;
+  - - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - ':'
+  - - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: C-m, h: Raise}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+  Lower:
+  - ['', '', '', '', '', '', '', '', '', '', '', '']
+  - ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', ^]
+  - ['', '', '', '', '', '', ;, ':', '[', ']', '@', ¥]
+  - - ''
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - ''
+  Raise:
+  - ['', '', '', '', '', '', '', '', '', '', '', '']
+  - ['', '', '', HOME, END, INS, LEFT, DOWN, UP, RIGHT, PG DN, PG UP]
+  - [F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12]
+  - - ''
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - ''
+  Adjust:
+  - - ''
+    - ''
+    - {t: USB, s: +IR}
+    - {t: BT0, s: +IR}
+    - {t: BT1, s: +IR}
+    - {t: BT2, s: +IR}
+    - BT3
+    - BT4
+    - BT CLR
+    - BT CLR ALL
+    - ''
+    - ''
+  - - Bond dump
+    - {t: Mouse pair, s: Shift}
+    - {t: Mouse unpair, s: Shift}
+    - ''
+    - ''
+    - ''
+    - MUTE
+    - VOL DN
+    - VOL UP
+    - ''
+    - ''
+    - ''
+  - [RGB ON, RGB OFF, RGB EFF, RGB EFR, RGB HUI, RGB HUD, RGB SAI, RGB SAD, RGB BRI, RGB BRD, RGB SPI, RGB SPD]
+  - - ''
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - ''

@@ -1,0 +1,47 @@
+name: Keymap data
+
+# Regenerate keymap/tk46v6b.yaml and docs/keymap.svg when the keymap,
+# the physical layout or the keymap-drawer settings change.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "config/boards/shields/tk46v6/tk46v6.keymap"
+      - "config/boards/shields/tk46v6/tk46v6.dtsi"
+      - "config/boards/shields/common/keycode_japanese.h"
+      - "keymap/config.yaml"
+      - "keymap/gen.sh"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  draw:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install keymap-drawer
+        run: pip install keymap-drawer==0.23.0
+
+      - name: Generate
+        run: ./keymap/gen.sh --draw
+
+      # Commits made with GITHUB_TOKEN do not trigger other workflows,
+      # so this neither loops nor starts a firmware build.
+      - name: Commit if changed
+        run: |
+          git add keymap/tk46v6b.yaml docs/keymap.svg
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Keymap data: regenerate yaml and chart"
+            git push
+          fi

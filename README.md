@@ -30,7 +30,11 @@ mouse connects straight to the keyboard.
 Five layers: two base layers (US / JA), lower, raise, and adjust (lower + raise
 via a conditional/tri-layer).
 
-Keymap chart: [docs/tk46v6_keymap_compact.pdf](docs/tk46v6_keymap_compact.pdf)
+![tk46v6b keymap](docs/keymap.svg)
+
+The chart above is generated from `tk46v6.keymap` and the physical layout in
+`tk46v6.dtsi` (see [Keymap data](#keymap-data)).
+Compact printable chart: [docs/tk46v6_keymap_compact.pdf](docs/tk46v6_keymap_compact.pdf)
 (source: `docs/tk46v6_keymap_compact.pages`).
 
 ### Base layers: US and JA (AZIK)
@@ -76,6 +80,38 @@ Each output key is a mod-morph on Shift:
 Use Shift to move the keyboard (and the BLE mouse riding on it) to another host
 without sending IR, i.e. without switching the IR-controlled device's input.
 IR codes are defined in `config/boards/shields/common/ir_codes.h`.
+
+## Keymap data
+
+The physical layout is defined once, in
+`config/boards/shields/tk46v6/tk46v6.dtsi` (`zmk,physical-layout`: key size,
+position and rotation in 1/100 u). ZMK Studio and the keymap chart both use it.
+
+[keymap-drawer](https://github.com/caksoylar/keymap-drawer) turns the keymap
+into data:
+
+| File | What it is |
+| --- | --- |
+| `keymap/config.yaml` | keymap-drawer settings: JIS legends for the US-named HID codes from `keycode_japanese.h`, display names for the custom behaviors |
+| `keymap/gen.sh` | Generator script |
+| `keymap/tk46v6b.yaml` | Generated: per-layer legends, in key-position order (`US`, `JA`, `Lower`, `Raise`, `Adjust`) |
+| `docs/keymap.svg` | Generated: the chart above |
+
+```sh
+pip install keymap-drawer
+./keymap/gen.sh          # keymap/tk46v6b.yaml
+./keymap/gen.sh --draw   # ...and docs/keymap.svg
+```
+
+The **Keymap data** workflow (`.github/workflows/keymap.yml`) runs the same
+script on every push that touches the keymap, the dtsi or `keymap/`, and
+commits the results. Changes under `keymap/` do not trigger a firmware build.
+
+`keymap/tk46v6b.yaml` together with `tk46v6.dtsi` is what the AZIK typing
+practice app reads to draw this keyboard and highlight the next key. Layer
+names are kept equal to the layer-key legends (`Lower`, `Raise`) so the app
+can tell which layer key to hold. When adding a custom behavior, give it a
+display name under `raw_binding_map` in `keymap/config.yaml`.
 
 ## Shields
 

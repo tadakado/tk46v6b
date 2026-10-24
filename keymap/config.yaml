@@ -1,0 +1,73 @@
+# keymap-drawer settings for tk46v6b (used by keymap/gen.sh)
+# https://github.com/caksoylar/keymap-drawer
+
+parse_config:
+  preprocess: true
+  trans_legend: {t: "▽", type: trans}
+
+  # keycode_japanese.h maps JIS keys onto US-named HID codes
+  # (JP_AT -> LBKT, JP_COLON -> SQT, ...). Show the JIS legends instead.
+  zmk_keycode_map:
+    LBKT: "@"
+    LEFT_BRACKET: "@"
+    RBKT: "["
+    RIGHT_BRACKET: "["
+    NUHS: "]"
+    NON_US_HASH: "]"
+    SQT: ":"
+    APOSTROPHE: ":"
+    SINGLE_QUOTE: ":"
+    EQUAL: "^"
+    INT3: "¥"
+    INT_YEN: "¥"
+    INT1: "_"
+    INT_RO: "_"
+    SEMI: ";"
+    SEMICOLON: ";"
+    MINUS: "-"
+    COMMA: ","
+    DOT: "."
+    PERIOD: "."
+    SLASH: "/"
+    FSLH: "/"
+    SPACE: "Space"
+    BSPC: "BS"
+    ENTER: "Enter"
+    ESC: "Esc"
+    DEL: "Del"
+    TAB: "Tab"
+    LALT: "Alt"
+    RALT: "Alt"
+    LGUI: "Cmd"
+    RGUI: "Cmd"
+    LSHFT: "Shift"
+    RSHFT: "Shift"
+
+  # Custom behaviors in tk46v6.keymap. Add an entry here when a new one appears.
+  raw_binding_map:
+    "&ctl_us LCTL 0": {t: "英数", h: "Ctrl"}
+    "&ctl_ja RCTL 0": {t: "かな", h: "Ctrl"}
+    "&raise_cm 3 LC(M)": {t: "C-m", h: "Raise"}
+    # Layer keys keep the layer names (Lower/Raise): the typing app uses this
+    # match to show "hold Lower" for characters on another layer.
+    "&mo 2": "Lower"
+    "&mo 3": "Raise"
+    "&none": ""
+    # Adjust layer: output selection / BLE helpers
+    "&sel_usb": {t: "USB", s: "+IR"}
+    "&sel_ble0": {t: "BT0", s: "+IR"}
+    "&sel_ble1": {t: "BT1", s: "+IR"}
+    "&sel_ble2": {t: "BT2", s: "+IR"}
+    "&sel_ble3": "BT3"
+    "&sel_ble4": "BT4"
+    "&bond_dump_act": "Bond dump"
+    "&mouse_pair_shift": {t: "Mouse pair", s: "Shift"}
+    "&mouse_unpair_shift": {t: "Mouse unpair", s: "Shift"}
+    "&kp JP_UNDER": "_"
+    "&kp LS(INT1)": "_"
+    "&kp LS(INT_RO)": "_"
+
+draw_config:
+  dark_mode: auto
+  key_w: 56
+  key_h: 52
