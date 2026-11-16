@@ -57,7 +57,7 @@
             #binding-cells = <2>;
             flavor = "hold-preferred";
             tapping-term-ms = <200>;
-            bindings = <&mo>, <&kp>;
+            bindings = <&mo>, <&ctl_m>;
         };
     };
 
@@ -71,6 +71,17 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&kp LANG1>, <&to 1>;
+        };
+        /* Ctrl-M as a real key stroke: Ctrl down, then M down/up, then Ctrl up, with
+           gaps in between. A plain &kp LC(M) tapped from a hold-tap sends Ctrl+M and
+           its release back to back, which the macOS Japanese IME (Kotoeri) does not
+           take as a commit on the first press (azooKey does). */
+        ctl_m: ctl_m {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <30>;
+            bindings = <&macro_press &kp LCTRL>, <&macro_tap &kp M>, <&macro_release &kp LCTRL>;
         };
     };
 
@@ -111,7 +122,7 @@
                 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &kp JP_COLON
                 &trans
                 &trans &trans &trans &trans &trans
-                &trans &raise_cm 3 LC(M) &trans &trans &trans
+                &trans &raise_cm 3 0 &trans &trans &trans
                 &trans
             >;
         };
