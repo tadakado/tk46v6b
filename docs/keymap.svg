@@ -513,7 +513,7 @@ path.combo { stroke: #7f7f7f; }
 </g>
 <g transform="translate(520, 195)" class="key keypos-43">
 <rect rx="6" ry="6" x="-24" y="-24" width="48" height="48" class="key"/>
-<text x="0" y="0" class="key tap">C-m</text>
+<text x="0" y="0" class="key tap">&amp;ctl_m</text>
 <a href="#Raise">
 <text x="0" y="22" class="key hold layer-activator">Raise</text>
 </a></g>
