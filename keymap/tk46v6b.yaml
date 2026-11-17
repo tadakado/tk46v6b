@@ -17,6 +17,18 @@ layers:
     - {t: Enter, h: Alt}
     - ''
   JA:
+  - - ''
+    - ''
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - ''
+    - ''
   - - {t: ▽, type: trans}
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
@@ -28,20 +40,8 @@ layers:
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
-    - {t: ▽, type: trans}
-  - - {t: ▽, type: trans}
-    - {t: ▽, type: trans}
-    - {t: ▽, type: trans}
-    - {t: ▽, type: trans}
-    - {t: ▽, type: trans}
-    - {t: ▽, type: trans}
-    - {t: ▽, type: trans}
-    - {t: ▽, type: trans}
-    - {t: ▽, type: trans}
-    - {t: ▽, type: trans}
-    - {t: ▽, type: trans}
-    - ;
-  - - {t: ▽, type: trans}
+    - ¥
+  - - ''
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
@@ -52,23 +52,23 @@ layers:
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
-    - ':'
-  - - {t: ▽, type: trans}
+    - Alt+Sft+/
+  - - ''
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
-    - {t: '&ctl_m', h: Raise}
+    - {t: C-m, h: Raise}
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
-    - {t: ▽, type: trans}
+    - ''
   Lower:
   - ['', '', '', '', '', '', '', '', '', '', '', '']
   - ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', ^]
-  - ['', '', '', '', '', '', ;, ':', '[', ']', '@', ¥]
+  - ['', '', '', '', '', '', ;, ':', '[', ']', '', '']
   - - ''
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
@@ -81,6 +81,33 @@ layers:
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
     - ''
+  JA_Lower:
+  - ['', '', '', '', '', '', '', '0', '-', ^, '', '']
+  - - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - '@'
+    - '['
+    - Sft+[
+  - ['', '', '', '', '', '', '', ;, ':', ']', _, 'Sft+]']
+  - - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: C-m, h: Raise}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
   Raise:
   - ['', '', '', '', '', '', '', '', '', '', '', '']
   - ['', '', '', HOME, END, INS, LEFT, DOWN, UP, RIGHT, PG DN, PG UP]
