@@ -20,7 +20,7 @@ SVG=docs/keymap.svg
 command -v keymap >/dev/null || { echo "keymap-drawer not found: pip install keymap-drawer" >&2; exit 1; }
 
 # Layer names must match the layer-key legends (Lower/Raise) in config.yaml.
-keymap -c "$CFG" parse -z "$KEYMAP" -c 12 -l US JA Lower Raise Adjust -o "$OUT"
+keymap -c "$CFG" parse -z "$KEYMAP" -c 12 -l US JA Lower JA_Lower Raise Adjust -o "$OUT"
 
 # Point the layout at the dtsi with a repo-relative path (no machine-specific paths).
 sed -i.bak "s|^layout: .*|layout: {dts_layout: $DTSI}|" "$OUT" && rm -f "$OUT.bak"

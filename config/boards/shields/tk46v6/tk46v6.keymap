@@ -6,11 +6,18 @@
 #include <dt-bindings/zmk/modifiers.h>
 
 / {
-     conditional_layers {
+    /* Layers: 0 US, 1 JA, 2 Lower, 3 JA_Lower, 4 Raise, 5 Adjust */
+    conditional_layers {
         compatible = "zmk,conditional-layers";
+        /* JA mode + Lower -> JA_Lower on top of Lower: its &trans keys fall
+           through to Lower, so it only needs the keys that differ. */
+        ja_lower {
+            if-layers = <1 2>;
+            then-layer = <3>;
+        };
         tri_layer {
-            if-layers = <2 3>;
-            then-layer = <4>;
+            if-layers = <2 4>;
+            then-layer = <5>;
         };
     };
 
@@ -90,7 +97,7 @@
 
         default_layer {
             display-name = "US";
-            // --- ---  w   e   r   t           y   u   i   o  --- ---
+            //          w   e   r   t           y   u   i   o
             //  q   a   s   d   f   g           h   j   k   l   p   @
             //  _   z   x   c   v   b           n   m   ,   .   /   \
             //         ALT GUI SFT LOW CTL CTL RIS SFT GUI ALT
@@ -102,46 +109,62 @@
                 &kp JP_UNDER &kp Z &kp X &kp C &kp V &kp B &kp N &kp M &kp JP_COMMA &kp JP_DOT &kp JP_SLASH &kp JP_YEN
                 &none
                 &mt LALT ESC &mt LGUI DEL &mt LSHFT TAB &mo 2 &ctl_us LCTL 0
-                &ctl_ja RCTL 0 &mo 3 &mt RSHFT SPACE &mt RGUI BSPC &mt RALT ENTER
+                &ctl_ja RCTL 0 &mo 4 &mt RSHFT SPACE &mt RGUI BSPC &mt RALT ENTER
                 &none
             >;
         };
 
         ja_layer {
-            display-name = "JA (AZIK)";
-            // Same as US except:  @ -> ; (AZIK: っ)   \ -> : (AZIK: ー)
-            //                     RIS tap -> Ctrl-M (hold is still raise)
-            // --- --- ___ ___ ___ ___         ___ ___ ___ ___ --- ---
-            // ___ ___ ___ ___ ___ ___         ___ ___ ___ ___ ___  ;
-            // ___ ___ ___ ___ ___ ___         ___ ___ ___ ___ ___  :
+            display-name = "JA";
+            //         ___ ___ ___ ___         ___ ___ ___ ___
+            // ___ ___ ___ ___ ___ ___         ___ ___ ___ ___ ___ ー
+            // ___ ___ ___ ___ ___ ___         ___ ___ ___ ___ ___ ？
             //         ___ ___ ___ ___ ___ ___ C-m ___ ___ ___
 
             bindings = <
-                &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
-                &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &kp JP_SEMI
-                &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &kp JP_COLON
-                &trans
+                &none &none &trans &trans &trans &trans &trans &trans &trans &trans &none &none
+                &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &kp JP_YEN
+                &none &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &kp LA(LS(JP_SLASH))
+                &none
                 &trans &trans &trans &trans &trans
-                &trans &raise_cm 3 0 &trans &trans &trans
-                &trans
+                &trans &raise_cm 4 0 &trans &trans &trans
+                &none
             >;
         };
 
         lower_layer {
             display-name = "Lower Layer";
-            // --- --- --- --- --- ---         --- --- --- --- --- ---
+            //         --- --- --- ---         --- --- --- ---
             //  1   2   3   4   5   6           7   8   9   0   -   ^
-            // --- --- --- --- --- ---          ;   :   [   ]  (@) (\)
+            // --- --- --- --- --- ---          ;   :   [   ]  --- ---
             //         ___ ___ ___ ___ ___ ___ ___ ___ ___ ___
 
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp JP_MINUS &kp JP_CARET
-                &none &none &none &none &none &none &kp JP_SEMI &kp JP_COLON &kp JP_LBKT &kp JP_RBKT &kp JP_AT &kp JP_YEN
+                &none &none &none &none &none &none &kp JP_SEMI &kp JP_COLON &kp JP_LBKT &kp JP_RBKT &none &none
                 &none
                 &trans &trans &trans &trans &trans
                 &trans &trans &trans &trans &trans
                 &none
+            >;
+        };
+
+        ja_lower_layer {
+            display-name = "JA Lower";
+            //         --- --- --- ---         --- WA  HO  HE
+            // NU  FU   A   U   E   O          YA  YU  YO  ゛  ゜  「
+            // --- --- --- --- --- ---         --- RE  KE  MU  RO   」
+            //         ___ ___ ___ ___ ___ ___ C-m ___ ___ ___
+
+            bindings = <
+                &none &none &none &none &none &none &none &kp N0 &kp JP_MINUS &kp JP_CARET &none &none
+                &trans &trans &trans &trans &trans &trans &trans &trans &trans &kp JP_AT &kp JP_LBKT &kp LS(JP_LBKT)
+                &none &none &none &none &none &none &none &kp JP_SEMI &kp JP_COLON &kp JP_RBKT &kp JP_UNDER &kp LS(JP_RBKT)
+                &trans
+                &trans &trans &trans &trans &trans
+                &trans &raise_cm 4 0 &trans &trans &trans
+                &trans
             >;
         };
 
@@ -165,8 +188,8 @@
 
         adjust_layer {
             display-name = "Adjust Layer";
-            // --- --- USB BT0 BT1 BT2         BT3 BT4 CLR CLRALL --- --- (BT_DESC 0~4 : SHIFT + BT0~4)
-            // BDP MP  MUP --- --- ---         MUT Vvv v^^ --- --- ---
+            //         USB BT0 BT1 BT2         BT3 BT4 CLR CLRALL (BT_DESC 0~4 : SHIFT + BT0~4)
+            // BND Mp  Mup --- --- ---         MUT Vvv v^^ --- --- ---
             // ON  OFF EFF EFR HUD HUI         SAI SAD BRI BRD SPI SPD
             //         ___ ___ ___ ___ ___ ___ ___ ___ ___ ___
 

@@ -47,11 +47,11 @@ parse_config:
   raw_binding_map:
     "&ctl_us LCTL 0": {t: "英数", h: "Ctrl"}
     "&ctl_ja RCTL 0": {t: "かな", h: "Ctrl"}
-    "&raise_cm 3 LC(M)": {t: "C-m", h: "Raise"}
+    "&raise_cm 4 0": {t: "C-m", h: "Raise"}
     # Layer keys keep the layer names (Lower/Raise): the typing app uses this
     # match to show "hold Lower" for characters on another layer.
     "&mo 2": "Lower"
-    "&mo 3": "Raise"
+    "&mo 4": "Raise"
     "&none": ""
     # Adjust layer: output selection / BLE helpers
     "&sel_usb": {t: "USB", s: "+IR"}
