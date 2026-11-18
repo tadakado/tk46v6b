@@ -39,7 +39,7 @@
         };
 
         /* Thumb Ctrl keys: hold = Ctrl, tap = IME switch + base-layer switch.
-           US: LANG2 (英数) + layer 0 / JA: LANG1 (かな) + layer 1 (AZIK). */
+           US: LANG2 (英数) + layer 0 / JA: LANG1 (かな) + layer 1. */
         ctl_us: ctl_us {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -136,13 +136,13 @@
             display-name = "Lower Layer";
             //         --- --- --- ---         --- --- --- ---
             //  1   2   3   4   5   6           7   8   9   0   -   ^
-            // --- --- --- --- --- ---          ;   :   [   ]  --- ---
+            // --- --- --- --- --- ---          ;   :   [   ]   _  ---
             //         ___ ___ ___ ___ ___ ___ ___ ___ ___ ___
 
             bindings = <
                 &none &none &none &none &none &none &none &none &none &none &none &none
                 &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp JP_MINUS &kp JP_CARET
-                &none &none &none &none &none &none &kp JP_SEMI &kp JP_COLON &kp JP_LBKT &kp JP_RBKT &none &none
+                &none &none &none &none &none &none &kp JP_SEMI &kp JP_COLON &kp JP_LBKT &kp JP_RBKT &kp JP_UNDER &none
                 &none
                 &trans &trans &trans &trans &trans
                 &trans &trans &trans &trans &trans
